@@ -13,7 +13,7 @@ dotenv.config();
 const app=express();
 app.use(cors());
 app.use(express.json())
-// const port=5000;
+const port=5000;
 
 let token;
 // const notionread = new NotionAPI()
@@ -505,3 +505,6 @@ app.get('/test/:id', async(req,res)=>{
     }
 })
 
+app.listen(port,()=>{
+    console.log(`running on port ${port}`);
+})
