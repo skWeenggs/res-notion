@@ -261,182 +261,184 @@ app.post('/loginadmin', async(req,res)=>{
 })
 
 app.post('/submitFormToNotion', async(req,res)=>{
-    const notion= new Client({ auth:process.env.NOTION_KEY});
-    const email = req.body.email;
-    const domain_name = req.body.domain;
-    const contentPageId = req.body.content_page_id;
-    const pagesPageId = req.body.pages_page_id;
-    const ownerPageId = req.body.owner_page_id;
-    const token_secretid = req.body.token_secretid;
-    const template= req.body.temp;
-    
-    try{
-       const response=await notion.pages.create({
-           parent:{database_id: process.env.NOTION_DATABASE_ID },
-           properties:{
-            Name: {
-                title: [
-                  {
-                    text: {
-                      "content": "Master Page"
-                    }
-                  }
-                ]
-              },
-            Email:{
-                type:'email',
-                email:email
-            }, 
-            Domain:{
-                rich_text:[{
-                    text:{
-                        content: domain_name
-                    }
-                }
-                ]
-            } ,
-            ContentPageId:{
-                rich_text:[{
-                    text:{
-                        content:contentPageId
-                    }
-                }
-                ]
-            } ,
-          
-            PagesPageId:{
-                rich_text:[{
-                    text:{
-                        content: pagesPageId
-                    }
-                }
-                ]
-            },
-            OwnerPageId:{
-                rich_text:[{
-                    text:{
-                        content: ownerPageId
-                    }
-                }
-                ]
-            },
-            NotionToken:{
-                rich_text:[
-                    {
-                        text:{
-                            content: token_secretid
-                        }
-                    }
-                ]
-            },
-            Template:{
-                rich_text:[
-                    {
-                        text:{
-                            content: template
-                        }
-                    }
-                ]
+    console.log("hii");
+     const notion= new Client({ auth:process.env.NOTION_KEY});
+     const email = req.body.email;
+     const domain_name = req.body.domain;
+     const menuPageId = req.body.menu_page_id;
+     const pagesPageId = req.body.pages_page_id;
+     const authorPageId = req.body.author_page_id;
+     const token_secretid = req.body.token_secretid;
+     const template= req.body.temp;
+     console.log(email,domain_name,menuPageId,pagesPageId,token_secretid,template);
+     try{
+        const response=await notion.pages.create({
+            parent:{database_id: process.env.NOTION_DATABASE_ID },
+            properties:{
+             Name: {
+                 title: [
+                   {
+                     text: {
+                       "content": "Master Page"
+                     }
+                   }
+                 ]
+               },
+             Email:{
+                 type:'email',
+                 email:email
+             }, 
+             Domain:{
+                 rich_text:[{
+                     text:{
+                         content: domain_name
+                     }
+                 }
+                 ]
+             } ,
+             MenuPageId:{
+                 rich_text:[{
+                     text:{
+                         content:menuPageId
+                     }
+                 }
+                 ]
+             } ,
+           
+             PagesPageId:{
+                 rich_text:[{
+                     text:{
+                         content: pagesPageId
+                     }
+                 }
+                 ]
+             },
+             AuthorPageId:{
+                 rich_text:[{
+                     text:{
+                         content: authorPageId
+                     }
+                 }
+                 ]
+             },
+             NotionToken:{
+                 rich_text:[
+                     {
+                         text:{
+                             content: token_secretid
+                         }
+                     }
+                 ]
+             },
+             Template:{
+                 rich_text:[
+                     {
+                         text:{
+                             content: template
+                         }
+                     }
+                 ]
+             }
             }
-           }
-       })
-    
-       res.send(response);
-   }catch(err){
-        res.send(err);
-       console.log(err);
-    }
-})
-
-app.patch('/updateuser/:id', async(req,res)=>{
-    console.log(req.params.id);
-    const notion= new Client({ auth:process.env.NOTION_KEY});
-    const email = req.body.email;
-    const domain_name = req.body.domain;
-    const contentPageId = req.body.contentPageId;
-    const pagesPageId = req.body.pagesPageId;
-    const ownerPageId = req.body.ownerPageId;
-    const token_secretid = req.body.notionToken;
-    const template= req.body.temp;
-    console.log(email,domain_name,contentPageId,pagesPageId,token_secretid,template);
-    const pageId=req.params.id;
-    try{
-       const response=await notion.pages.update({
-           page_id:req.params.id,
-           properties:{
-            Name: {
-                title: [
-                  {
-                    text: {
-                      "content": "Master Page"
-                    }
-                  }
-                ]
-              },
-            Email:{
-                type:'email',
-                email:email
-            }, 
-            Domain:{
-                rich_text:[{
-                    text:{
-                        content: domain_name
-                    }
-                }
-                ]
-            } ,
-            ContentPageId:{
-                rich_text:[{
-                    text:{
-                        content:contentPageId
-                    }
-                }
-                ]
-            } ,
-          
-            PagesPageId:{
-                rich_text:[{
-                    text:{
-                        content: pagesPageId
-                    }
-                }
-                ]
-            },
-            OwnerPageId:{
-                rich_text:[{
-                    text:{
-                        content: ownerPageId
-                    }
-                }
-                ]
-            },
-            NotionToken:{
-                rich_text:[
-                    {
-                        text:{
-                            content: token_secretid
-                        }
-                    }
-                ]
-            },
-            Template:{
-                rich_text:[
-                    {
-                        text:{
-                            content: template
-                        }
-                    }
-                ]
+        })
+     
+        res.send(response);
+    }catch(err){
+         res.send(err);
+        console.log(err);
+     }
+ })
+ 
+ app.patch('/updateuser/:id', async(req,res)=>{
+     console.log(req.params.id);
+     const notion= new Client({ auth:process.env.NOTION_KEY});
+     const email = req.body.email;
+     const domain_name = req.body.domain;
+     const menuPageId = req.body.menuPageId;
+     const pagesPageId = req.body.pagesPageId;
+     const authorPageId = req.body.authorPageId;
+     const token_secretid = req.body.notionToken;
+     const template= req.body.temp;
+     console.log(email,domain_name,contentPageId,pagesPageId,token_secretid,template);
+     const pageId=req.params.id;
+     try{
+        const response=await notion.pages.update({
+            page_id:req.params.id,
+            properties:{
+             Name: {
+                 title: [
+                   {
+                     text: {
+                       "content": "Master Page"
+                     }
+                   }
+                 ]
+               },
+             Email:{
+                 type:'email',
+                 email:email
+             }, 
+             Domain:{
+                 rich_text:[{
+                     text:{
+                         content: domain_name
+                     }
+                 }
+                 ]
+             } ,
+             ContentPageId:{
+                 rich_text:[{
+                     text:{
+                         content:menuPageId
+                     }
+                 }
+                 ]
+             } ,
+           
+             PagesPageId:{
+                 rich_text:[{
+                     text:{
+                         content: pagesPageId
+                     }
+                 }
+                 ]
+             },
+             AuthorPageId:{
+                 rich_text:[{
+                     text:{
+                         content: authorPageId
+                     }
+                 }
+                 ]
+             },
+             NotionToken:{
+                 rich_text:[
+                     {
+                         text:{
+                             content: token_secretid
+                         }
+                     }
+                 ]
+             },
+             Template:{
+                 rich_text:[
+                     {
+                         text:{
+                             content: template
+                         }
+                     }
+                 ]
+             }
             }
-           }
-       })
-    
-       res.send(response);
-   }catch(err){
-        res.send(err);
-       console.log(err);
-    }
-})
+        })
+     
+        res.send(response);
+    }catch(err){
+         res.send(err);
+        console.log(err);
+     }
+ })
+ 
 
 app.delete('/deleterecord/:id',varifyToken, async(req,res)=>{
     try
