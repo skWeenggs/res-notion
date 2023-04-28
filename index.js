@@ -23,7 +23,7 @@ app.use('/call',(req,res)=>{
 })
 // const notion= new Client({ auth:process.env.NOTION_KEY});
 const domainTokenMap = [
-    { domain: 'localhost', token: "secret_yn81q8XwMz7sTw5cBJyRjw0PF4fspzVKf2U951WDzGl" },
+    { domain: 'localhost', token: "secret_oMRoYk0fKJjsD5OSmfb2XeBBGcBjYRqWZTqYNQQEoEj" },
    
     // add more domain-token mappings as needed
   ];
@@ -266,7 +266,7 @@ app.post('/submitFormToNotion', async(req,res)=>{
     const domain_name = req.body.domain;
     const contentPageId = req.body.content_page_id;
     const pagesPageId = req.body.pages_page_id;
-    const authorPageId = req.body.author_page_id;
+    const ownerPageId = req.body.owner_page_id;
     const token_secretid = req.body.token_secretid;
     const template= req.body.temp;
     
@@ -312,10 +312,10 @@ app.post('/submitFormToNotion', async(req,res)=>{
                 }
                 ]
             },
-            AuthorPageId:{
+            OwnerPageId:{
                 rich_text:[{
                     text:{
-                        content: authorPageId
+                        content: ownerPageId
                     }
                 }
                 ]
@@ -355,7 +355,7 @@ app.patch('/updateuser/:id', async(req,res)=>{
     const domain_name = req.body.domain;
     const contentPageId = req.body.contentPageId;
     const pagesPageId = req.body.pagesPageId;
-    const authorPageId = req.body.authorPageId;
+    const ownerPageId = req.body.ownerPageId;
     const token_secretid = req.body.notionToken;
     const template= req.body.temp;
     console.log(email,domain_name,contentPageId,pagesPageId,token_secretid,template);
@@ -402,10 +402,10 @@ app.patch('/updateuser/:id', async(req,res)=>{
                 }
                 ]
             },
-            AuthorPageId:{
+            OwnerPageId:{
                 rich_text:[{
                     text:{
-                        content: authorPageId
+                        content: ownerPageId
                     }
                 }
                 ]
